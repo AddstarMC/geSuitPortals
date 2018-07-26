@@ -1,7 +1,5 @@
 package net.cubespace.geSuitPortals.listeners;
 
-import net.cubespace.geSuitPortals.geSuitPortals;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -56,13 +54,14 @@ public class PlayerMoveListener implements Listener {
         if (!PortalsManager.PORTALS.containsKey(f.getWorld())) {
             return;
         }
-        if (f.getRelative(BlockFace.NORTH).getType() == Material.PORTAL || f.getRelative(BlockFace.NORTH).getType() == Material.ENDER_PORTAL) {
+        if (f.getRelative(BlockFace.NORTH).getType() == Material.NETHER_PORTAL || f.getRelative(BlockFace
+                .NORTH).getType() == Material.END_PORTAL) {
             b = f.getRelative(BlockFace.NORTH);
-        } else if (f.getRelative(BlockFace.EAST).getType() == Material.PORTAL || f.getRelative(BlockFace.EAST).getType() == Material.ENDER_PORTAL) {
+        } else if (f.getRelative(BlockFace.EAST).getType() == Material.NETHER_PORTAL || f.getRelative(BlockFace.EAST).getType() == Material.END_PORTAL) {
             b = f.getRelative(BlockFace.EAST);
-        } else if (f.getRelative(BlockFace.SOUTH).getType() == Material.PORTAL || f.getRelative(BlockFace.SOUTH).getType() == Material.ENDER_PORTAL) {
+        } else if (f.getRelative(BlockFace.SOUTH).getType() == Material.NETHER_PORTAL || f.getRelative(BlockFace.SOUTH).getType() == Material.END_PORTAL) {
             b = f.getRelative(BlockFace.SOUTH);
-        } else if (f.getRelative(BlockFace.WEST).getType() == Material.PORTAL || f.getRelative(BlockFace.WEST).getType() == Material.ENDER_PORTAL) {
+        } else if (f.getRelative(BlockFace.WEST).getType() == Material.NETHER_PORTAL || f.getRelative(BlockFace.WEST).getType() == Material.END_PORTAL) {
             b = f.getRelative(BlockFace.WEST);
         } else {
             return;

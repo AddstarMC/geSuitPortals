@@ -59,6 +59,6 @@ public class AntiBurnListener implements Listener {
     private boolean canIgnite(Block block) {
         Material mat = block.getType();
 
-        return (mat == Material.LAVA || mat == Material.STATIONARY_LAVA);
+        return (mat == Material.LAVA);
     }
 }

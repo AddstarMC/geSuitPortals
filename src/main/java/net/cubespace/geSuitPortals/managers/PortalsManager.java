@@ -92,37 +92,43 @@ public class PortalsManager {
     public static void setPortal( CommandSender sender, String name, String type, String dest, String fill ) {
 
         Player p = ( Player ) sender;
-        Selection sel = geSuitPortals.WORLDEDIT.getSelection( p );
-
-        ByteArrayOutputStream b = new ByteArrayOutputStream();
-        DataOutputStream out = new DataOutputStream( b );
-        try {
-            out.writeUTF( "SetPortal" );
-            out.writeUTF( sender.getName() );
-            if ( sel == null || !( sel instanceof CuboidSelection ) ) {
-                out.writeBoolean( false );
-            } else {
-                out.writeBoolean( true );
-                out.writeUTF( name );
-                out.writeUTF( type );
-                out.writeUTF( dest );
-                out.writeUTF( fill );
-                Location max = sel.getMaximumPoint();
-                Location min = sel.getMinimumPoint();
-                out.writeUTF( max.getWorld().getName() );
-                out.writeDouble( max.getX() );
-                out.writeDouble( max.getY() );
-                out.writeDouble( max.getZ() );
-                out.writeUTF( min.getWorld().getName() );
-                out.writeDouble( min.getX() );
-                out.writeDouble( min.getY() );
-                out.writeDouble( min.getZ() );
+        if(geSuitPortals.WORLDEDIT != null) {
+            Selection sel = geSuitPortals.WORLDEDIT.getSelection(p);
+    
+    
+            ByteArrayOutputStream b = new ByteArrayOutputStream();
+            DataOutputStream out = new DataOutputStream(b);
+            try {
+                out.writeUTF("SetPortal");
+                out.writeUTF(sender.getName());
+                if (sel == null || !(sel instanceof CuboidSelection)) {
+                    out.writeBoolean(false);
+                } else {
+                    out.writeBoolean(true);
+                    out.writeUTF(name);
+                    out.writeUTF(type);
+                    out.writeUTF(dest);
+                    out.writeUTF(fill);
+                    Location max = sel.getMaximumPoint();
+                    Location min = sel.getMinimumPoint();
+                    out.writeUTF(max.getWorld().getName());
+                    out.writeDouble(max.getX());
+                    out.writeDouble(max.getY());
+                    out.writeDouble(max.getZ());
+                    out.writeUTF(min.getWorld().getName());
+                    out.writeDouble(min.getX());
+                    out.writeDouble(min.getY());
+                    out.writeDouble(min.getZ());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch ( IOException e ) {
-            e.printStackTrace();
+            new PluginMessageTask(b).runTaskAsynchronously(geSuitPortals.INSTANCE);
+        }else{
+            sender.sendMessage(ChatColor.RED + "Worldedit not loaded cannot select a portal " +
+                    "site....");
         }
-        new PluginMessageTask( b ).runTaskAsynchronously( geSuitPortals.INSTANCE );
-
+        
     }
 
     public static void addPortal( String name, String type, String dest, String filltype, Location max, Location min ) {
